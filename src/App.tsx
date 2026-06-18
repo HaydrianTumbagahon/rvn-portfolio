@@ -3,7 +3,14 @@ import { Link as LinkIcon, Menu, X, Phone, Mail, Download, ArrowRight } from 'lu
 import facebookIcon from './assets/icons/facebook.svg';
 import githubIcon from './assets/icons/github.svg';
 import linkedinIcon from './assets/icons/linkedin.svg';
-import personalImg from './assets/images/personal_img.png';
+import htmlIcon from './assets/icons/html.svg';
+import cssIcon from './assets/icons/css.svg';
+import javascriptIcon from './assets/icons/javascript.svg';
+import reactIcon from './assets/icons/react.svg';
+import tailwindIcon from './assets/icons/tailwind.svg';
+import Orb from './components/Orb';
+import Stack from './components/Stack';
+import CardSwap, { Card } from './components/CardSwap';
 
 const navigation = [
   { label: 'Home', href: '#home' },
@@ -25,6 +32,8 @@ const skills = [
   'react',
   'tailwind'
 ];
+
+const skillIcons = [htmlIcon, cssIcon, javascriptIcon, reactIcon, tailwindIcon];
 
 const projects = [
   {
@@ -48,6 +57,114 @@ const projects = [
     description: 'A sleek brand landing experience built for storytelling and polished presentation.',
     color: 'from-violet-500 to-slate-900'
   }
+];
+
+const experienceCards = [
+  <div key="education" className="h-full w-full rounded-[1.5rem] border border-white/10 bg-[#020814]/90 p-6 shadow-[0_20px_60px_rgba(15,23,42,0.25)]">
+    <p className="text-sm uppercase tracking-[0.35em] text-slate-400">Education</p>
+    <h3 className="mt-4 text-2xl font-semibold text-white">B.S. Information Technology</h3>
+    <p className="mt-2 text-sm text-slate-300">Aug 2020 — May 2024</p>
+    <div className="my-4 h-px bg-white/10" />
+    <p className="text-sm leading-7 text-slate-300">Graduated Magna Cum Laude with a focus on IT systems, software development, and user-centered digital experiences.</p>
+    <ul className="mt-4 space-y-2 text-sm text-slate-300">
+      <li className="flex items-start gap-2">
+        <span className="mt-1 h-2 w-2 rounded-full bg-sky-400" />
+        Systems analysis, troubleshooting, and cross-functional collaboration.
+      </li>
+      <li className="flex items-start gap-2">
+        <span className="mt-1 h-2 w-2 rounded-full bg-sky-400" />
+        Front-end tools, responsive design, and clean UI implementation.
+      </li>
+      <li className="flex items-start gap-2">
+        <span className="mt-1 h-2 w-2 rounded-full bg-sky-400" />
+        Research, technical documentation, and project delivery.
+      </li>
+    </ul>
+  </div>,
+  <div key="internship" className="h-full w-full rounded-[1.5rem] border border-white/10 bg-[#020814]/90 p-6 shadow-[0_20px_60px_rgba(15,23,42,0.25)]">
+    <p className="text-sm uppercase tracking-[0.35em] text-slate-400">Internship</p>
+    <h3 className="mt-4 text-2xl font-semibold text-white">IT Systems Intern</h3>
+    <p className="mt-2 text-sm text-slate-300">Jun 2023 — Nov 2023</p>
+    <div className="my-4 h-px bg-white/10" />
+    <p className="text-sm leading-7 text-slate-300">Supported daily infrastructure operations, improved deployment workflows, and helped maintain internal collaboration systems.</p>
+    <ul className="mt-4 space-y-2 text-sm text-slate-300">
+      <li className="flex items-start gap-2">
+        <span className="mt-1 h-2 w-2 rounded-full bg-sky-400" />
+        Network support, system monitoring, and incident tracking.
+      </li>
+      <li className="flex items-start gap-2">
+        <span className="mt-1 h-2 w-2 rounded-full bg-sky-400" />
+        Process documentation and team communication.
+      </li>
+      <li className="flex items-start gap-2">
+        <span className="mt-1 h-2 w-2 rounded-full bg-sky-400" />
+        Hands-on experience with IT ticketing and support tools.
+      </li>
+    </ul>
+  </div>,
+  <div key="job" className="h-full w-full rounded-[1.5rem] border border-white/10 bg-[#020814]/90 p-6 shadow-[0_20px_60px_rgba(15,23,42,0.25)]">
+    <p className="text-sm uppercase tracking-[0.35em] text-slate-400">Job experience</p>
+    <h3 className="mt-4 text-2xl font-semibold text-white">IT Support Specialist</h3>
+    <p className="mt-2 text-sm text-slate-300">Jan 2024 — Present</p>
+    <div className="my-4 h-px bg-white/10" />
+    <p className="text-sm leading-7 text-slate-300">Providing technical support across hardware, software, and endpoint systems while optimizing processes for faster resolution and better user outcomes.</p>
+    <ul className="mt-4 space-y-2 text-sm text-slate-300">
+      <li className="flex items-start gap-2">
+        <span className="mt-1 h-2 w-2 rounded-full bg-sky-400" />
+        Incident troubleshooting, escalation management, and SLA adherence.
+      </li>
+      <li className="flex items-start gap-2">
+        <span className="mt-1 h-2 w-2 rounded-full bg-sky-400" />
+        Customer service, communication, and cross-team collaboration.
+      </li>
+      <li className="flex items-start gap-2">
+        <span className="mt-1 h-2 w-2 rounded-full bg-sky-400" />
+        System updates, asset management, and security best practices.
+      </li>
+    </ul>
+  </div>,
+  <div key="training" className="h-full w-full rounded-[1.5rem] border border-white/10 bg-[#020814]/90 p-6 shadow-[0_20px_60px_rgba(15,23,42,0.25)]">
+    <p className="text-sm uppercase tracking-[0.35em] text-slate-400">Training</p>
+    <h3 className="mt-4 text-2xl font-semibold text-white">Professional Development</h3>
+    <p className="mt-2 text-sm text-slate-300">Feb 2024 — Apr 2024</p>
+    <div className="my-4 h-px bg-white/10" />
+    <p className="text-sm leading-7 text-slate-300">Completed in-depth coursework and workshops focused on security, IT support, and best practices for delivering modern digital services.</p>
+    <ul className="mt-4 space-y-2 text-sm text-slate-300">
+      <li className="flex items-start gap-2">
+        <span className="mt-1 h-2 w-2 rounded-full bg-sky-400" />
+        Security fundamentals and risk reduction techniques.
+      </li>
+      <li className="flex items-start gap-2">
+        <span className="mt-1 h-2 w-2 rounded-full bg-sky-400" />
+        ITIL-style service delivery and process improvement.
+      </li>
+      <li className="flex items-start gap-2">
+        <span className="mt-1 h-2 w-2 rounded-full bg-sky-400" />
+        Team coordination, reporting, and quality assurance.
+      </li>
+    </ul>
+  </div>,
+  <div key="certification" className="h-full w-full rounded-[1.5rem] border border-white/10 bg-[#020814]/90 p-6 shadow-[0_20px_60px_rgba(15,23,42,0.25)]">
+    <p className="text-sm uppercase tracking-[0.35em] text-slate-400">Certification</p>
+    <h3 className="mt-4 text-2xl font-semibold text-white">Certified IT Support Professional</h3>
+    <p className="mt-2 text-sm text-slate-300">Oct 2024</p>
+    <div className="my-4 h-px bg-white/10" />
+    <p className="text-sm leading-7 text-slate-300">A certification validating core IT support knowledge, problem solving, and effective service delivery.</p>
+    <ul className="mt-4 space-y-2 text-sm text-slate-300">
+      <li className="flex items-start gap-2">
+        <span className="mt-1 h-2 w-2 rounded-full bg-sky-400" />
+        Core troubleshooting and endpoint support skills.
+      </li>
+      <li className="flex items-start gap-2">
+        <span className="mt-1 h-2 w-2 rounded-full bg-sky-400" />
+        Best practices for communication and customer care.
+      </li>
+      <li className="flex items-start gap-2">
+        <span className="mt-1 h-2 w-2 rounded-full bg-sky-400" />
+        IT support workflows and efficient issue resolution.
+      </li>
+    </ul>
+  </div>
 ];
 
 const quotes = [
@@ -120,10 +237,10 @@ function App() {
         />
       </div>
 
-      <header className="fixed inset-x-0 top-0 z-40 border-b border-white/10 bg-[#02040c]/85 backdrop-blur-xl">
-        <div className="mx-auto flex h-16 max-w-[1280px] items-center justify-between px-4 sm:px-6">
-          <a href="#home" className="text-lg font-semibold tracking-[0.35em] text-white/90">
-            Portfolio
+      <header className="fixed left-1/2 top-4 z-40 w-[70%] max-w-[1200px] -translate-x-1/2 rounded-[1rem] border border-white/15 bg-slate-950/60/70 backdrop-blur-2xl shadow-[0_35px_80px_rgba(15,23,42,0.24)]">
+        <div className="mx-auto flex h-16 min-h-[4rem] items-center justify-between px-4 py-2 sm:px-6">
+          <a href="#home" className="text-lg font-black tracking-[0.35em] text-white rvn-glow">
+            RVN
           </a>
 
           <nav className="hidden items-center gap-8 md:flex">
@@ -161,7 +278,8 @@ function App() {
         style={{ transform: isMenuOpen ? 'translateX(0)' : 'translateX(100%)' }}
       >
         <div className="mb-8 flex items-center justify-between">
-          <span className="text-sm uppercase tracking-[0.35em] text-slate-400">Portfolio</span>
+          <span className="text-sm uppercase tracking-[0.35em] text-sky-300 font-black rvn-glow md:hidden">RYVEN</span>
+          <span className="hidden text-sm uppercase tracking-[0.35em] text-sky-300 font-black rvn-glow md:block">RVN</span>
           <button
             type="button"
             onClick={() => setIsMenuOpen(false)}
@@ -205,24 +323,33 @@ function App() {
       </aside>
 
       <main className="relative overflow-hidden pb-24 pt-16">
-        <section id="home" className="relative pt-5">
-          <div className="absolute right-0 top-20 hidden h-72 w-72 rounded-full bg-sky-500/10 blur-3xl md:block" />
-          <div className="absolute left-0 top-64 hidden h-60 w-60 rounded-full bg-blue-500/10 blur-3xl md:block" />
+        <section id="home" className="relative min-h-[calc(100vh-4rem)] overflow-hidden pt-5">
+          <div className="absolute inset-0 z-0">
+            <Orb
+              hoverIntensity={2}
+              rotateOnHover
+              hue={0}
+              forceHoverState={false}
+              backgroundColor="#050811"
+            />
+          </div>
 
-          <div className="mx-auto grid min-h-[calc(100vh-4rem)] max-w-[1320px] items-center gap-16 px-4 py-12 sm:px-6 sm:py-16 lg:grid-cols-[1.1fr_0.9fr] lg:px-8">
-            <div className="space-y-6">
+          <div className="relative z-10 mx-auto flex min-h-[calc(100vh-4rem)] max-w-[1320px] flex-col items-center justify-center px-4 py-12 sm:px-6 sm:py-16 lg:px-8">
+            <div className="space-y-8 text-center max-w-2xl">
               <div className="inline-flex items-center gap-2 rounded-full border border-sky-400/20 bg-sky-500/10 px-4 py-2 text-sm uppercase tracking-[0.35em] text-sky-200">
-                Aspiring web designer
+                IT Professional
               </div>
-              <div className="space-y-5">
-                <h1 className="max-w-3xl text-[clamp(2.6rem,5vw,5rem)] font-black leading-[0.95] tracking-[-0.04em] text-white">
-                  Hi! I'm <span className="text-sky-300">Haydrian Tumbagahon</span>.
+              <div className="space-y-6 flex flex-col items-center text-center">
+                <h1 className="text-[clamp(2.6rem,5vw,5rem)] font-black leading-[0.95] tracking-[-0.04em] text-white">
+                  <span className="text-sky-300">Haydrian Tumbagahon</span>
                 </h1>
-                <p className="max-w-xl text-lg leading-8 text-slate-300 sm:text-xl">
-                  I craft futuristic digital experiences with a minimal edge, combining elegant motion, responsive layout, and sharp dark-mode design.
+                <p className=" max-w-2xl text-lg leading-8 text-slate-300  sm:text-xl">
+                  Turning ideas into polished, user-friendly web experiences. 
+                  <br />
+                  
                 </p>
               </div>
-              <div className="flex flex-wrap gap-4">
+              <div className="flex justify-center flex-wrap gap-4 pt-4">
                 <a
                   href="#contact"
                   className="inline-flex items-center gap-2 rounded-full border border-sky-400/30 bg-sky-400/10 px-6 py-3 text-sm font-semibold text-sky-100 transition duration-200 hover:border-sky-300 hover:bg-sky-300/15 hover:text-white"
@@ -232,160 +359,112 @@ function App() {
                 </a>
               </div>
             </div>
-
-            <div className="relative mx-auto flex min-h-[360px] max-w-[420px] items-center justify-center overflow-hidden rounded-[2rem] border border-white/10 bg-gradient-to-br from-slate-900 via-slate-950 to-slate-900 px-4 py-6 shadow-[0_40px_120px_rgba(14,165,233,0.14)]" style={{ transform: `translateY(${heroParallax * 0.1}px)` }}>
-              <div className="absolute inset-0 rounded-[2rem] bg-[radial-gradient(circle_at_top,_rgba(56,189,248,.18),_transparent_26%),radial-gradient(circle_at_80%_20%,_rgba(59,130,246,.16),_transparent_18%)]" />
-              <img src={personalImg} alt="Personal" className="relative h-full w-full rounded-[1.75rem] object-cover" />
-            </div>
           </div>
         </section>
 
-        <section id="about" className="border-t border-white/10 py-24">
+        <section id="about" className="border-t border-white/10 pt-24 pb-6">
           <div className="mx-auto max-w-[1180px] px-4 sm:px-6 lg:px-8">
-            <div className="grid gap-12 lg:grid-cols-[0.9fr_0.7fr] lg:items-start">
+            <div className="grid gap-12 lg:grid-cols-[0.9fr_1.1fr] lg:items-start">
               <div className="space-y-6">
-                <p className="text-xs uppercase tracking-[0.35em] text-sky-300">About</p>
-                <h2 className="text-4xl font-bold tracking-tight text-white sm:text-5xl">
-                  A concise introduction for a modern portfolio.
+                <p className="text-base uppercase tracking-[0.35em] text-sky-300">About</p>
+                <h2 className="text-5xl font-bold tracking-tight text-white sm:text-6xl">
+                  Hello! I'm Haydrian C. Tumbagahon
                 </h2>
-                <p className="max-w-2xl leading-8 text-slate-300">
-                  I focus on building responsive digital experiences with clear structure, vibrant motion, and polished interactions. My approach is minimal but impactful, letting content breathe while guiding users through each section.
+                <p className="max-w-2xl leading-8 text-slate-300 lg:max-w-none">
+                  a 23-year-old web designer from San Jose del Monte, Bulacan.
+                  I specialize in web design and enjoy using AI tools effectively. I’m skilled in research, documentation, troubleshooting (hardware & software), networking, customer service, and remote support.
+                  In my free time, I’m an audiophile who loves exploring IEMs, discovering new tech, playing gacha, strategy, and card games, cycling, and reading.
+                  Always eager to learn and create meaningful digital experiences.
                 </p>
               </div>
 
-              <div className="space-y-4 rounded-[2rem] border border-white/10 bg-white/5 p-6 shadow-[0_30px_80px_rgba(15,23,42,0.3)]">
-                <div className="space-y-2">
-                  <p className="text-sm uppercase tracking-[0.35em] text-slate-400">Education</p>
-                  <p className="text-lg font-semibold text-white">University of Technology</p>
-                  <p className="text-sm text-slate-400">Graduated Magna Cum Laude</p>
-                </div>
-                <div className="divide-y divide-white/10 py-4 text-slate-300">
-                  <div className="space-y-1 py-4">
-                    <p className="font-semibold text-white">Capstone</p>
-                    <p className="text-sm text-slate-400">Designing a brand-led digital platform for immersive storytelling.</p>
-                  </div>
-                  <div className="space-y-1 py-4">
-                    <p className="font-semibold text-white">Projects</p>
-                    <p className="text-sm text-slate-400">Interactive UI experiments, dashboard systems, motion-driven landing pages.</p>
-                  </div>
-                  <div className="space-y-1 py-4">
-                    <p className="font-semibold text-white">Organization</p>
-                    <p className="text-sm text-slate-400">ELITES Finance Director — leading design systems and communications.</p>
-                  </div>
+              <div className="flex items-center justify-center">
+                <div className="w-full max-w-[820px] h-[36rem] sm:h-[38rem] lg:h-[40rem] mt-2">
+                  <Stack
+                    randomRotation={false}
+                    sensitivity={200}
+                    sendToBackOnClick
+                    cards={experienceCards}
+                    autoplay={false}
+                    autoplayDelay={3000}
+                    pauseOnHover={false}
+                  />
                 </div>
               </div>
             </div>
           </div>
         </section>
 
-        <section className="py-24">
+        <section className="pt-6 pb-12">
           <div className="mx-auto max-w-[1180px] px-4 sm:px-6 lg:px-8">
             <div className="flex flex-col gap-6 md:flex-row md:items-center md:justify-between">
               <div>
-                <p className="text-xs uppercase tracking-[0.35em] text-sky-300">Technology stack</p>
-                <h3 className="mt-3 text-3xl font-bold text-white">Skills in motion.</h3>
+                <p className="text-xs uppercase tracking-[0.35em] text-sky-300">Stack</p>
               </div>
-              <p className="max-w-2xl text-sm leading-7 text-slate-400 md:max-w-xl">
-                A continuous carousel of modern tools, frameworks, and systems I use to create fluid front-end experiences.
-              </p>
             </div>
 
-            <div className="mt-8 overflow-hidden rounded-[2rem] border border-white/10 bg-white/5 p-4">
-              <div className="flex animate-scroll gap-6 py-4 text-sm text-white/80">
-                {skills.concat(skills).map((skill, index) => (
-                  <span
-                    key={`${skill}-${index}`}
-                    className="rounded-full border border-white/10 bg-white/5 px-5 py-3 text-center font-medium text-slate-100 shadow-[0_12px_40px_rgba(255,255,255,0.05)]"
-                  >
-                    {skill}
-                  </span>
-                ))}
+            <div className="mt-6">
+              <div className="marquee h-12 sm:h-16 md:h-20">
+                <div className="marquee-track">
+                  {Array.from({ length: 8 }).map((_, i) =>
+                    skillIcons.map((icon, j) => (
+                      <img
+                        key={`skill-${i}-${j}`}
+                        src={icon}
+                        alt={`skill-${j}`}
+                        className="h-10 w-10 sm:h-12 sm:w-12 md:h-14 md:w-14 flex-shrink-0 object-contain"
+                      />
+                    ))
+                  )}
+                </div>
               </div>
             </div>
           </div>
         </section>
 
-        <section id="projects" className="border-t border-white/10 py-24">
+        <section id="projects" className="border-t border-white/10 pt-0 pb-24 relative">
           <div className="mx-auto max-w-[1180px] px-4 sm:px-6 lg:px-8">
-            <div className="mb-12 flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
-              <div>
+            <div className="grid gap-12 lg:grid-cols-[0.9fr_1.1fr] lg:items-center">
+              <div className="space-y-6">
                 <p className="text-xs uppercase tracking-[0.35em] text-sky-300">Projects</p>
-                <h2 className="mt-3 text-4xl font-bold text-white">Interactive showcases.</h2>
+                <h2 className="text-4xl font-bold text-white">Featured Projects</h2>
+                <p className="max-w-xl text-sm leading-7 text-slate-400">
+                  Turning ideas into polished, functional digital experiences.
+                </p>
+                <p className="max-w-xl text-sm leading-7 text-slate-400">
+                 I build modern, high-quality web applications using React + Vite, Tailwind CSS, and GSAP for smooth, eye-catching animations. By combining these powerful tools with beautiful open-source UI libraries such as Shadcn/UI, Tailgrids, and other carefully selected React component libraries, I create fast, responsive, and visually stunning digital experiences.
+                </p>
+                <p className="max-w-xl text-sm leading-7 text-slate-400">
+                 Each project is crafted with attention to clean code architecture, thoughtful interactions, and pixel-perfect design. Whether it’s a personal portfolio, business website, or interactive web application, my goal is always the same — to deliver solutions that not only look great but also perform exceptionally well across all devices.
+                </p>
               </div>
-              <p className="max-w-xl text-sm leading-7 text-slate-400 sm:text-right">
-                Swipe or click each project to reveal the details, with immersive focus mode and polished transitions.
-              </p>
-            </div>
 
-            <div className="grid gap-6 sm:grid-cols-2 xl:grid-cols-3">
-              {projects.map((project) => (
-                <button
-                  key={project.id}
-                  type="button"
-                  onClick={() => setActiveProject(project.id)}
-                  className={`group relative overflow-hidden rounded-[2rem] border border-white/10 p-6 text-left transition duration-300 hover:-translate-y-1 hover:border-sky-400/30 hover:bg-white/5`}
+              <div style={{ height: '600px', position: 'relative' }} className="relative">
+                <CardSwap
+                  cardDistance={60}
+                  verticalDistance={70}
+                  delay={5000}
+                  pauseOnHover={false}
+                  onCardClick={(index) => {}}
                 >
-                  <div className={`absolute inset-0 bg-gradient-to-br ${project.color} opacity-10`} />
-                  <div className="relative space-y-4">
-                    <div className="flex items-center justify-between text-sm text-slate-300">
-                      <span>{project.date}</span>
-                      <ArrowRight className="transition-transform duration-300 group-hover:translate-x-1" />
-                    </div>
-                    <h3 className="text-2xl font-semibold text-white">{project.title}</h3>
-                    <p className="leading-7 text-slate-300">{project.description}</p>
-                  </div>
-                </button>
-              ))}
+                  {projects.map((project) => (
+                    <Card key={project.id} customClass="w-[500px] h-[400px] rounded-[2rem] border-white/20 bg-gradient-to-br from-slate-900 to-black p-8 flex flex-col justify-between shadow-[0_30px_80px_rgba(15,23,42,0.5)]">
+                      <div>
+                        <p className="text-xs uppercase tracking-[0.35em] text-sky-300">{project.date}</p>
+                        <h3 className="mt-4 text-2xl font-semibold text-white">{project.title}</h3>
+                        <p className="mt-3 text-sm leading-6 text-slate-300">{project.description}</p>
+                      </div>
+                      <div className="flex items-center justify-between">
+                        <span className="text-xs text-slate-400">Explore project</span>
+                        <ArrowRight size={18} className="text-sky-400" />
+                      </div>
+                    </Card>
+                  ))}
+                </CardSwap>
+              </div>
             </div>
           </div>
         </section>
-
-        {activeProject !== null && (
-          <div className="fixed inset-0 z-50 grid place-items-center overflow-hidden bg-black/90 px-4 py-10 text-white">
-            <div className="relative w-full max-w-3xl rounded-[2rem] border border-white/10 bg-[#07101d] p-6 shadow-[0_40px_120px_rgba(0,0,0,0.6)]">
-              <button
-                type="button"
-                onClick={() => setActiveProject(null)}
-                className="absolute right-5 top-5 rounded-full border border-white/10 p-3 text-white/90 transition hover:border-sky-400/50 hover:text-white"
-              >
-                <X size={20} />
-              </button>
-              <div className="grid gap-6 lg:grid-cols-[1fr_0.9fr] lg:items-start">
-                <div className="space-y-4">
-                  <div className="h-72 rounded-[1.75rem] bg-gradient-to-br from-sky-500 to-blue-950 p-6 shadow-[0_30px_80px_rgba(14,165,233,0.35)]">
-                    <div className="flex h-full flex-col justify-between rounded-[1.5rem] bg-black/20 p-5 backdrop-blur-xl">
-                      <span className="text-xs uppercase tracking-[0.35em] text-sky-200/80">Project preview</span>
-                      <div className="text-4xl font-bold text-white/90">Zoom</div>
-                    </div>
-                  </div>
-                </div>
-                <div className="space-y-4">
-                  <div className="rounded-[1.5rem] border border-white/10 bg-white/5 p-6">
-                    <p className="text-xs uppercase tracking-[0.35em] text-sky-300">Project details</p>
-                    <h3 className="mt-3 text-3xl font-semibold text-white">
-                      {projects.find((project) => project.id === activeProject)?.title}
-                    </h3>
-                    <p className="mt-4 text-slate-300">
-                      {projects.find((project) => project.id === activeProject)?.description}
-                    </p>
-                  </div>
-                  <div className="grid gap-4 sm:grid-cols-2">
-                    <div className="rounded-[1.5rem] border border-white/10 bg-white/5 p-5">
-                      <p className="text-sm text-slate-400">Created</p>
-                      <p className="mt-2 text-lg font-semibold text-white">
-                        {projects.find((project) => project.id === activeProject)?.date}
-                      </p>
-                    </div>
-                    <div className="rounded-[1.5rem] border border-white/10 bg-white/5 p-5">
-                      <p className="text-sm text-slate-400">Type</p>
-                      <p className="mt-2 text-lg font-semibold text-white">Portfolio case study</p>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        )}
 
         <section id="contact" className="py-24">
           <div className="mx-auto max-w-[1180px] px-4 sm:px-6 lg:px-8">
@@ -408,17 +487,17 @@ function App() {
                   </div>
                 </div>
                 <div className="space-y-3 rounded-[1.75rem] border border-white/10 bg-[#06101d]/80 p-5">
-                  <a href="tel:+1234567890" className="flex items-center gap-3 text-slate-200 transition hover:text-sky-300">
+                  <a href="tel:+639764808047" className="flex items-center gap-3 text-slate-200 transition hover:text-sky-300">
                     <Phone size={18} />
-                    <span>+63 912 345 6789</span>
+                    <span>+63 976 480 8047</span>
                   </a>
-                  <a href="mailto:haydrian@example.com" className="flex items-center gap-3 text-slate-200 transition hover:text-sky-300">
+                  <a href="mailto:haydriantumbagahon1205@gmail.com" className="flex items-center gap-3 text-slate-200 transition hover:text-sky-300">
                     <Mail size={18} />
-                    <span>haydrian@example.com</span>
+                    <span>haydriantumbagahon1205@gmail.com</span>
                   </a>
-                  <a href="#" className="flex items-center gap-3 text-slate-200 transition hover:text-sky-300">
+                  <a href="https://www.linkedin.com/in/haydrian-c-tumbagahon" className="flex items-center gap-3 text-slate-200 transition hover:text-sky-300">
                     <LinkIcon size={18} />
-                    <span>linkedin.com/in/haydrian</span>
+                    <span>linkedin.com/in/haydrian-c-tumbagahon</span>
                   </a>
                 </div>
               </div>
@@ -448,7 +527,7 @@ function App() {
                     </a>
                   ))}
                 </div>
-                <p className="text-sm text-slate-400">Created by Ryven</p>
+                <p className="text-sm text-slate-400">Created by ryven</p>
               </div>
             </div>
           </div>

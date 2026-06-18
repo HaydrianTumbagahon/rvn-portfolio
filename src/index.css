@@ -53,6 +53,30 @@ select {
   animation: scroll-slide 18s linear infinite;
 }
 
+/* Continuous marquee for skill icons (right -> left across full width) */
+.marquee {
+  width: 100%;
+  overflow: hidden;
+}
+.marquee-track {
+  display: flex;
+  gap: 2.5rem;
+  align-items: center;
+  will-change: transform;
+  animation: marquee var(--marquee-duration, 18s) linear infinite;
+}
+@keyframes marquee {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+.marquee-track img {
+  display: block;
+}
+
 .link-underline {
   position: relative;
 }
@@ -71,4 +95,28 @@ select {
 .link-underline:hover::after {
   width: 100%;
   left: 0;
+}
+
+/* Paragraphs should be justified for consistent reading rhythm */
+p {
+  text-align: justify;
+}
+
+@keyframes glow-pulse {
+  0%, 100% {
+    text-shadow: 0 0 10px rgba(56, 189, 248, 0.8),
+                 0 0 20px rgba(96, 165, 250, 0.6),
+                 0 0 30px rgba(147, 197, 253, 0.4),
+                 0 0 40px rgba(191, 219, 254, 0.2);
+  }
+  50% {
+    text-shadow: 0 0 15px rgba(147, 197, 253, 0.9),
+                 0 0 30px rgba(96, 165, 250, 0.8),
+                 0 0 45px rgba(56, 189, 248, 0.6),
+                 0 0 60px rgba(191, 219, 254, 0.3);
+  }
+}
+
+.rvn-glow {
+  animation: glow-pulse 3s ease-in-out infinite;
 }
