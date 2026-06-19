@@ -8,9 +8,17 @@ import cssIcon from './assets/icons/css.svg';
 import javascriptIcon from './assets/icons/javascript.svg';
 import reactIcon from './assets/icons/react.svg';
 import tailwindIcon from './assets/icons/tailwind.svg';
+import instagramIcon from './assets/icons/instagram.svg';
+import xIcon from './assets/icons/x.svg';
 import Orb from './components/Orb';
 import Stack from './components/Stack';
 import CardSwap, { Card } from './components/CardSwap';
+import TiltedCard from './components/TiltedCard';
+import GooeyNav from './components/GooeyNav';
+import personalImg from './assets/images/personal_img.png';
+import todoImg from './assets/images/to-do-app.png';
+import mangaImg from './assets/images/manga-translator.png';
+import calcImg from './assets/images/calculator.png';
 
 const navigation = [
   { label: 'Home', href: '#home' },
@@ -38,24 +46,27 @@ const skillIcons = [htmlIcon, cssIcon, javascriptIcon, reactIcon, tailwindIcon];
 const projects = [
   {
     id: 1,
-    title: 'Modern Portfolio Platform',
-    date: '2026',
-    description: 'A futuristic personal portfolio experience with dark mode, fluid responsiveness, and animated storytelling.',
-    color: 'from-sky-500 to-blue-800'
+    title: 'To-Do App',
+    date: 'September 2025',
+    description: 'A lightweight task manager with priorities and due dates.',
+    image: todoImg,
+    url: 'https://to-do-app-ryven.vercel.app/'
   },
   {
     id: 2,
-    title: 'Interactive Dashboard',
-    date: '2025',
-    description: 'A minimal dashboard with real-time analytics, clean interactions, and intuitive controls.',
-    color: 'from-cyan-500 to-indigo-900'
+    title: 'Manga Translator',
+    date: 'June 2026',
+    description: 'Translate and read manga with inline translations and bookmarks.',
+    image: mangaImg,
+    url: 'https://rvn-manga-translator.vercel.app/'
   },
   {
     id: 3,
-    title: 'Brand Experience Site',
-    date: '2025',
-    description: 'A sleek brand landing experience built for storytelling and polished presentation.',
-    color: 'from-violet-500 to-slate-900'
+    title: 'Calculator',
+    date: 'August 2025',
+    description: 'A simple, responsive calculator with basic operations.',
+    image: calcImg,
+    url: 'https://simple-calculator-ryven.vercel.app/'
   }
 ];
 
@@ -167,57 +178,56 @@ const experienceCards = [
   </div>
 ];
 
-const quotes = [
-  'Design is intelligence made visible.',
-  'Minimalism is not a lack of something. It’s simply the perfect amount of something.',
-  'Good design is good business.',
-  'Simplicity is the ultimate sophistication.',
-  'Design adds value faster than it adds costs.',
-  'Content precedes design. Design in the absence of content is not design.',
-  'Design is the silent ambassador of your brand.',
-  'Great design is a multi-layered relationship between human life and its environment.',
-  'The details are not the details. They make the design.',
-  'Design is thinking made visual.',
-  'Every great design begins with an even better story.',
-  'The only important thing about design is how it relates to people.',
-  'Make it simple, but significant.',
-  'Design is where science and art break even.',
-  'The best way to predict the future is to create it.',
-  'Simplicity carried to an extreme becomes elegance.',
-  'Less is more.',
-  'Design is not just what it looks like and feels like. Design is how it works.',
-  'Innovation distinguishes between a leader and a follower.',
-  'Good design is obvious. Great design is transparent.'
-];
-
 function App() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [activeProject, setActiveProject] = useState<number | null>(null);
-  const [quoteIndex, setQuoteIndex] = useState(0);
   const [scrollProgress, setScrollProgress] = useState(0);
   const [heroParallax, setHeroParallax] = useState(0);
+  const [supportsSmoothMotion, setSupportsSmoothMotion] = useState(true);
 
   useEffect(() => {
+    const checkPerformance = () => {
+      const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      const saveData = (navigator as any).connection?.saveData;
+      const deviceMemory = (navigator as any).deviceMemory;
+      const cpuCores = navigator.hardwareConcurrency;
+      const isLowEndDevice =
+        prefersReducedMotion ||
+        saveData ||
+        (deviceMemory !== undefined && deviceMemory <= 2) ||
+        (cpuCores !== undefined && cpuCores <= 4) ||
+        window.innerWidth <= 768;
+
+      setSupportsSmoothMotion(!isLowEndDevice);
+    };
+
+    checkPerformance();
+    window.addEventListener('resize', checkPerformance);
+    return () => window.removeEventListener('resize', checkPerformance);
+  }, []);
+
+  useEffect(() => {
+    let ticking = false;
+
     const onScroll = () => {
-      const scrollY = window.scrollY;
-      const maxScroll = document.body.scrollHeight - window.innerHeight;
-      setScrollProgress(maxScroll > 0 ? scrollY / maxScroll : 0);
-      setHeroParallax(scrollY * 0.14);
+      if (ticking) return;
+      ticking = true;
+
+      requestAnimationFrame(() => {
+        const scrollY = window.scrollY;
+        const maxScroll = document.body.scrollHeight - window.innerHeight;
+
+        setScrollProgress(maxScroll > 0 ? scrollY / maxScroll : 0);
+        setHeroParallax(supportsSmoothMotion ? scrollY * 0.08 : 0);
+        ticking = false;
+      });
     };
 
     window.addEventListener('scroll', onScroll, { passive: true });
     onScroll();
 
     return () => window.removeEventListener('scroll', onScroll);
-  }, []);
-
-  useEffect(() => {
-    const interval = window.setInterval(() => {
-      setQuoteIndex((current) => (current + 1) % quotes.length);
-    }, 6000);
-
-    return () => window.clearInterval(interval);
-  }, []);
+  }, [supportsSmoothMotion]);
 
   useEffect(() => {
     document.body.style.overflow = isMenuOpen ? 'hidden' : 'auto';
@@ -225,8 +235,6 @@ function App() {
       document.body.style.overflow = 'auto';
     };
   }, [isMenuOpen]);
-
-  const activeQuote = useMemo(() => quotes[quoteIndex], [quoteIndex]);
 
   return (
     <div className="relative overflow-x-hidden bg-[#050811] text-white">
@@ -243,17 +251,18 @@ function App() {
             RVN
           </a>
 
-          <nav className="hidden items-center gap-8 md:flex">
-            {navigation.map((item) => (
-              <a
-                key={item.label}
-                href={item.href}
-                className="link-underline text-sm font-medium text-white/80 transition-colors duration-200 hover:text-white"
-              >
-                {item.label}
-              </a>
-            ))}
-          </nav>
+          <div className="hidden md:flex md:flex-1 md:justify-end">
+            <GooeyNav
+              items={navigation.map((item) => ({ label: item.label, href: item.href }))}
+              particleCount={15}
+              particleDistances={[90, 10]}
+              particleR={100}
+              initialActiveIndex={0}
+              animationTime={600}
+              timeVariance={300}
+              colors={[1, 2, 3, 1, 2, 3, 1, 4]}
+            />
+          </div>
 
           <button
             type="button"
@@ -334,7 +343,10 @@ function App() {
             />
           </div>
 
-          <div className="relative z-10 mx-auto flex min-h-[calc(100vh-4rem)] max-w-[1320px] flex-col items-center justify-center px-4 py-12 sm:px-6 sm:py-16 lg:px-8">
+          <div
+            className="relative z-10 mx-auto flex min-h-[calc(100vh-4rem)] max-w-[1320px] flex-col items-center justify-center px-4 py-12 sm:px-6 sm:py-16 lg:px-8 will-change-transform"
+            style={supportsSmoothMotion ? { transform: `translate3d(0, ${heroParallax}px, 0)` } : undefined}
+          >
             <div className="space-y-8 text-center max-w-2xl">
               <div className="inline-flex items-center gap-2 rounded-full border border-sky-400/20 bg-sky-500/10 px-4 py-2 text-sm uppercase tracking-[0.35em] text-sky-200">
                 IT Professional
@@ -351,7 +363,9 @@ function App() {
               </div>
               <div className="flex justify-center flex-wrap gap-4 pt-4">
                 <a
-                  href="#contact"
+                  href="/cv.pdf"
+                  target="_blank"
+                  rel="noopener noreferrer"
                   className="inline-flex items-center gap-2 rounded-full border border-sky-400/30 bg-sky-400/10 px-6 py-3 text-sm font-semibold text-sky-100 transition duration-200 hover:border-sky-300 hover:bg-sky-300/15 hover:text-white"
                 >
                   Download CV
@@ -422,9 +436,9 @@ function App() {
           </div>
         </section>
 
-        <section id="projects" className="border-t border-white/10 pt-0 pb-24 relative">
+        <section id="projects" className="border-t border-white/10 pt-6 pb-24 relative">
           <div className="mx-auto max-w-[1180px] px-4 sm:px-6 lg:px-8">
-            <div className="grid gap-12 lg:grid-cols-[0.9fr_1.1fr] lg:items-center">
+            <div className="grid gap-12 grid-cols-1 lg:grid-cols-[0.9fr_1.1fr] lg:items-center">
               <div className="space-y-6">
                 <p className="text-xs uppercase tracking-[0.35em] text-sky-300">Projects</p>
                 <h2 className="text-4xl font-bold text-white">Featured Projects</h2>
@@ -439,7 +453,7 @@ function App() {
                 </p>
               </div>
 
-              <div style={{ height: '600px', position: 'relative' }} className="relative">
+              <div className="relative flex items-center justify-center w-full h-[350px] sm:h-[450px] lg:h-[600px] mx-auto lg:mx-0">
                 <CardSwap
                   cardDistance={60}
                   verticalDistance={70}
@@ -448,15 +462,28 @@ function App() {
                   onCardClick={(index) => {}}
                 >
                   {projects.map((project) => (
-                    <Card key={project.id} customClass="w-[500px] h-[400px] rounded-[2rem] border-white/20 bg-gradient-to-br from-slate-900 to-black p-8 flex flex-col justify-between shadow-[0_30px_80px_rgba(15,23,42,0.5)]">
-                      <div>
-                        <p className="text-xs uppercase tracking-[0.35em] text-sky-300">{project.date}</p>
-                        <h3 className="mt-4 text-2xl font-semibold text-white">{project.title}</h3>
-                        <p className="mt-3 text-sm leading-6 text-slate-300">{project.description}</p>
-                      </div>
-                      <div className="flex items-center justify-between">
-                        <span className="text-xs text-slate-400">Explore project</span>
-                        <ArrowRight size={18} className="text-sky-400" />
+                    <Card
+                      key={project.id}
+                      customClass="w-[280px] h-[200px] sm:w-[380px] sm:h-[300px] lg:w-[500px] lg:h-[400px] rounded-[2rem] border-white/20 p-0 shadow-[0_30px_80px_rgba(15,23,42,0.5)] overflow-hidden"
+                    >
+                      <div className="relative w-full h-full">
+                        <img src={project.image} alt={project.title} className="absolute inset-0 w-full h-full object-cover" />
+                        <div className="absolute inset-0 bg-gradient-to-t from-black/75 via-black/30 to-transparent" />
+
+                        <div className="relative z-10 flex h-full flex-col justify-between p-4 sm:p-6">
+                          <div>
+                            <p className="text-xs uppercase tracking-[0.35em] text-sky-300">{project.date}</p>
+                            <h3 className="mt-2 text-lg sm:text-2xl font-semibold text-white">{project.title}</h3>
+                            <p className="mt-2 text-xs sm:text-sm leading-5 text-slate-200/90">{project.description}</p>
+                          </div>
+
+                          <div className="flex items-center justify-between">
+                            <span className="text-xs text-slate-200/90">Explore project</span>
+                            <a href={project.url} target="_blank" rel="noopener noreferrer" className="text-sky-400 hover:text-sky-300">
+                              <ArrowRight size={18} />
+                            </a>
+                          </div>
+                        </div>
                       </div>
                     </Card>
                   ))}
@@ -466,73 +493,57 @@ function App() {
           </div>
         </section>
 
-        <section id="contact" className="py-24">
+        <section id="contact" className="pt-10 pb-24 sm:pt-12 lg:pt-24">
           <div className="mx-auto max-w-[1180px] px-4 sm:px-6 lg:px-8">
-            <div className="grid gap-12 lg:grid-cols-[0.9fr_0.7fr] lg:items-center">
-              <div className="space-y-6">
-                <p className="text-xs uppercase tracking-[0.35em] text-sky-300">Contact</p>
-                <h2 className="text-4xl font-bold tracking-tight text-white sm:text-5xl">
-                  Let’s build the next experience together.
-                </h2>
-                <p className="max-w-2xl leading-8 text-slate-300">
-                  I’m available for design-led frontend collaborations, immersive portfolio builds, and digital product design systems.
-                </p>
-              </div>
-              <div className="grid gap-4 rounded-[2rem] border border-white/10 bg-white/5 p-6 shadow-[0_40px_120px_rgba(0,0,0,0.2)]">
-                <div className="flex items-center gap-4 rounded-[1.75rem] border border-white/10 bg-slate-950/70 p-4">
-                  <div className="grid h-20 w-20 place-items-center rounded-full bg-gradient-to-br from-sky-500 to-blue-950 text-xl font-bold text-white">HT</div>
-                  <div>
-                    <p className="text-sm uppercase tracking-[0.35em] text-slate-400">Reach out</p>
-                    <p className="text-lg font-semibold text-white">Haydrian Tumbagahon</p>
-                  </div>
-                </div>
-                <div className="space-y-3 rounded-[1.75rem] border border-white/10 bg-[#06101d]/80 p-5">
-                  <a href="tel:+639764808047" className="flex items-center gap-3 text-slate-200 transition hover:text-sky-300">
-                    <Phone size={18} />
-                    <span>+63 976 480 8047</span>
-                  </a>
-                  <a href="mailto:haydriantumbagahon1205@gmail.com" className="flex items-center gap-3 text-slate-200 transition hover:text-sky-300">
-                    <Mail size={18} />
-                    <span>haydriantumbagahon1205@gmail.com</span>
-                  </a>
-                  <a href="https://www.linkedin.com/in/haydrian-c-tumbagahon" className="flex items-center gap-3 text-slate-200 transition hover:text-sky-300">
-                    <LinkIcon size={18} />
-                    <span>linkedin.com/in/haydrian-c-tumbagahon</span>
-                  </a>
-                </div>
+            <div className="flex justify-center">
+              <div className="w-full max-w-[720px]">
+                <TiltedCard
+                  imageSrc={personalImg}
+                  altText="Haydrian"
+                  containerHeight="220px"
+                  imageHeight="220px"
+                  displayOverlayContent
+                  overlayContent={
+                    <div className="flex h-full w-full flex-col items-center justify-center p-6">
+                      <div className="flex items-center gap-4">
+                        <div className="h-20 w-20 rounded-full overflow-hidden ring-2 ring-white/10">
+                          <img src={personalImg} alt="Haydrian" className="w-full h-full object-cover" />
+                        </div>
+                        <div className="text-left">
+                          <p className="text-sm uppercase tracking-[0.35em] text-sky-300">Reach out</p>
+                          <p className="text-lg font-semibold text-white">Haydrian Tumbagahon</p>
+                        </div>
+                      </div>
+
+                      <div className="mt-4 flex items-center justify-center gap-3">
+                        <a href="https://www.facebook.com/haydrian.tumbagahon" target="_blank" rel="noopener noreferrer" className="inline-flex h-11 w-11 items-center justify-center rounded-full border border-white/10 bg-white/5 p-2 text-slate-200 transition hover:border-sky-400/40 hover:bg-sky-300" aria-label="Facebook">
+                          <img src={facebookIcon} alt="Facebook" className="h-5 w-5" />
+                        </a>
+                        <a href="https://www.instagram.com/htumbagahon/" target="_blank" rel="noopener noreferrer" className="inline-flex h-11 w-11 items-center justify-center rounded-full border border-white/10 bg-white/5 p-2 text-slate-200 transition hover:border-sky-400/40 hover:bg-sky-300" aria-label="Instagram">
+                          <img src={instagramIcon} alt="Instagram" className="h-5 w-5" />
+                        </a>
+                        <a href="https://x.com/xXMrNoBody05Xx" target="_blank" rel="noopener noreferrer" className="inline-flex h-11 w-11 items-center justify-center rounded-full border border-white/10 bg-white/5 p-2 text-slate-200 transition hover:border-sky-400/40 hover:bg-sky-300" aria-label="X">
+                          <img src={xIcon} alt="X" className="h-5 w-5" />
+                        </a>
+                        <a href="https://www.linkedin.com/in/haydrian-c-tumbagahon" target="_blank" rel="noopener noreferrer" className="inline-flex h-11 w-11 items-center justify-center rounded-full border border-white/10 bg-white/5 p-2 text-slate-200 transition hover:border-sky-400/40 hover:bg-sky-300" aria-label="LinkedIn">
+                          <img src={linkedinIcon} alt="LinkedIn" className="h-5 w-5" />
+                        </a>
+                      </div>
+                    </div>
+                  }
+                />
               </div>
             </div>
           </div>
         </section>
 
-        <footer className="border-t border-white/10 py-20">
-          <div className="mx-auto max-w-[1180px] px-4 sm:px-6 lg:px-8">
-            <div className="space-y-16">
-              <div className="rounded-[2rem] border border-white/10 bg-white/5 p-8 text-center text-slate-200 shadow-[0_35px_100px_rgba(15,23,42,0.2)]">
-                <p className="mx-auto max-w-3xl text-lg italic leading-8 text-slate-300">
-                  {activeQuote}
-                </p>
-              </div>
-
-              <div className="flex flex-col items-center justify-between gap-6 sm:flex-row">
-                <div className="flex items-center gap-4">
-                  {socials.map((social) => (
-                    <a
-                      key={social.label}
-                      href={social.href}
-                      className="inline-flex h-11 min-w-[3rem] items-center justify-center rounded-full border border-white/10 bg-white/5 p-3 text-sm font-semibold text-slate-950 transition hover:border-sky-400/40 hover:bg-sky-300"
-                      aria-label={social.label}
-                    >
-                      <img src={social.icon} alt={social.label} className="h-5 w-5" />
-                    </a>
-                  ))}
-                </div>
-                <p className="text-sm text-slate-400">Created by ryven</p>
-              </div>
-            </div>
+        <div className="w-full py-4">
+          <div className="mx-auto flex w-full items-center justify-center px-4">
+            <p className="text-sm text-slate-400">Created by ryven</p>
           </div>
-        </footer>
+        </div>
       </main>
+
     </div>
   );
 }

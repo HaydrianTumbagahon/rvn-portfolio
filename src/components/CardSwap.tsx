@@ -106,8 +106,9 @@ const CardSwap = ({
       tlRef.current = tl;
 
       if (elFront) {
+        const dropDistance = Math.max(120, verticalDistance * 2);
         tl.to(elFront, {
-          y: '+=500',
+          y: `+=${dropDistance}`,
           duration: config.durDrop,
           ease: config.ease
         });
@@ -199,7 +200,8 @@ const CardSwap = ({
       ? cloneElement(child as React.ReactElement<any>, {
           key: i,
           ref: refs[i],
-          style: { width, height, ...(child.props.style ?? {}) },
+          // let the child's classes control responsive sizing; avoid forcing inline width/height
+          style: { ...(child.props.style ?? {}) },
           onClick: (e: React.MouseEvent<HTMLDivElement>) => {
             child.props.onClick?.(e);
             onCardClick?.(i);
@@ -211,8 +213,8 @@ const CardSwap = ({
   return (
     <div
       ref={container}
-      className="absolute bottom-0 right-0 transform translate-x-[5%] translate-y-[20%] origin-bottom-right perspective-[900px] overflow-visible max-[768px]:translate-x-[25%] max-[768px]:translate-y-[25%] max-[768px]:scale-[0.75] max-[480px]:translate-x-[25%] max-[480px]:translate-y-[25%] max-[480px]:scale-[0.55]"
-      style={{ width, height }}
+      className="relative mx-auto flex items-center justify-center w-full h-full px-4 sm:px-6 mt-6 lg:mt-0 perspective-[900px] overflow-visible transform -translate-x-8 sm:-translate-x-16 lg:-translate-x-0 lg:absolute lg:bottom-0 lg:right-0 lg:translate-x-[5%] lg:translate-y-[20%] lg:origin-bottom-right lg:scale-100"
+      style={{ width: '100%', height: '100%' }}
     >
       {rendered}
     </div>
