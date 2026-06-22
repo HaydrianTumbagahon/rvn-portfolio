@@ -18,7 +18,7 @@ import GooeyNav from './components/GooeyNav';
 import personalImg from './assets/images/personal_img.png';
 import todoImg from './assets/images/to-do-app.png';
 import mangaImg from './assets/images/manga-translator.png';
-import calcImg from './assets/images/calculator.png';
+import financeImg from './assets/images/finance-app.png';
 
 const navigation = [
   { label: 'Home', href: '#home' },
@@ -62,11 +62,11 @@ const projects = [
   },
   {
     id: 3,
-    title: 'Calculator',
-    date: 'August 2025',
-    description: 'A simple, responsive calculator with basic operations.',
-    image: calcImg,
-    url: 'https://simple-calculator-ryven.vercel.app/'
+    title: 'Finance App',
+    date: 'May 2026',
+    description: 'Personal finance manager with budgets, transactions, and visualizations.',
+    image: financeImg,
+    url: 'https://rvn-finance-app.vercel.app/'
   }
 ];
 
