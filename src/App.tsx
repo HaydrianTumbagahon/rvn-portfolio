@@ -16,7 +16,7 @@ import CardSwap, { Card } from './components/CardSwap';
 import TiltedCard from './components/TiltedCard';
 import GooeyNav from './components/GooeyNav';
 import personalImg from './assets/images/personal_img.png';
-import todoImg from './assets/images/to-do-app.png';
+import savrImg from './assets/images/savr.png';
 import mangaImg from './assets/images/manga-translator.png';
 import financeImg from './assets/images/finance-app.png';
 
@@ -28,9 +28,9 @@ const navigation = [
 ];
 
 const socials = [
-  { label: 'Facebook', href: '#', icon: facebookIcon },
-  { label: 'GitHub', href: '#', icon: githubIcon },
-  { label: 'LinkedIn', href: '#', icon: linkedinIcon }
+  { label: 'Facebook', href: 'https://www.facebook.com/haydrian.tumbagahon', icon: facebookIcon },
+  { label: 'GitHub', href: 'https://github.com/HaydrianTumbagahon', icon: githubIcon },
+  { label: 'LinkedIn', href: 'https://www.linkedin.com/in/haydrian-c-tumbagahon', icon: linkedinIcon }
 ];
 
 const skills = [
@@ -46,11 +46,11 @@ const skillIcons = [htmlIcon, cssIcon, javascriptIcon, reactIcon, tailwindIcon];
 const projects = [
   {
     id: 1,
-    title: 'To-Do App',
-    date: 'September 2025',
-    description: 'A lightweight task manager with priorities and due dates.',
-    image: todoImg,
-    url: 'https://to-do-app-ryven.vercel.app/'
+    title: 'SAVR',
+    date: 'June 2026',
+    description: 'Food & recipe discovery with personalized recommendations and bookmarking.',
+    image: savrImg,
+    url: 'https://rvn-savr.vercel.app/'
   },
   {
     id: 2,
@@ -522,8 +522,8 @@ function App() {
                         <a href="https://www.instagram.com/htumbagahon/" target="_blank" rel="noopener noreferrer" className="inline-flex h-11 w-11 items-center justify-center rounded-full border border-white/10 bg-white/5 p-2 text-slate-200 transition hover:border-sky-400/40 hover:bg-sky-300" aria-label="Instagram">
                           <img src={instagramIcon} alt="Instagram" className="h-5 w-5" />
                         </a>
-                        <a href="https://x.com/xXMrNoBody05Xx" target="_blank" rel="noopener noreferrer" className="inline-flex h-11 w-11 items-center justify-center rounded-full border border-white/10 bg-white/5 p-2 text-slate-200 transition hover:border-sky-400/40 hover:bg-sky-300" aria-label="X">
-                          <img src={xIcon} alt="X" className="h-5 w-5" />
+                        <a href="https://github.com/HaydrianTumbagahon" target="_blank" rel="noopener noreferrer" className="inline-flex h-11 w-11 items-center justify-center rounded-full border border-white/10 bg-white/5 p-2 text-slate-200 transition hover:border-sky-400/40 hover:bg-sky-300" aria-label="GitHub">
+                          <img src={githubIcon} alt="GitHub" className="h-5 w-5" />
                         </a>
                         <a href="https://www.linkedin.com/in/haydrian-c-tumbagahon" target="_blank" rel="noopener noreferrer" className="inline-flex h-11 w-11 items-center justify-center rounded-full border border-white/10 bg-white/5 p-2 text-slate-200 transition hover:border-sky-400/40 hover:bg-sky-300" aria-label="LinkedIn">
                           <img src={linkedinIcon} alt="LinkedIn" className="h-5 w-5" />
